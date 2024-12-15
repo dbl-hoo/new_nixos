@@ -4,6 +4,10 @@
 
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
+    home-manager = {
+      url = "github:nix-community/home-manager";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 	
 	outputs = { self, nixpkgs, ... }@inputs: {
@@ -13,6 +17,15 @@
       modules = [ 
       ./gnome/configuration.nix 
       ./modules/common.nix
+      home-manager.nixosModules.home-manager
+        {
+            home-manager = {
+              useGlobalPkgs = true;
+              useUserPackages = true;
+              users.kirkham = import ./modules/home.nix;
+              extraSpecialArgs = {inherit inputs;}
+            };
+          };
       ];
     };
   };
