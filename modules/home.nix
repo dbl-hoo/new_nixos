@@ -6,12 +6,14 @@
   home.username = "kirkham";
   home.homeDirectory = "/home/kirkham";
 
-  # Packages that should be installed to the user profile.
-  home.packages = with pkgs; [
-    fastfetch
-    inputs.zen-browser.packages."${system}".specific
-  ];
+  # Import programs list from programs.nix
+  home.packages = import ./programs.nix { 
+    inherit pkgs inputs system; 
+  };
 
+  #enable firefox
+  programs.firefox.enable = true;
+  
   # Install & Configure Git
      programs.git = {
        enable = true;
@@ -24,6 +26,7 @@
   # when a new Home Manager release introduces backwards
   # incompatible changes.
   #
+
   # You can update Home Manager without changing this value. See
   # the Home Manager release notes for a list of state version
   # changes in each release.
