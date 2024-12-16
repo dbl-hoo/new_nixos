@@ -4,13 +4,14 @@
 
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
+    zen-browser.url = "github:MarceColl/zen-browser-flake";
     home-manager = {
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
     };
   };
-	
-	outputs = { self, nixpkgs, ... }@inputs: {
+
+	outputs = { self, nixpkgs, home-manager, zen-browser, ... }@inputs: {
     nixosConfigurations.gnome = nixpkgs.lib.nixosSystem {
       system = "x86_64-linux";
       specialArgs = { inherit inputs; };
@@ -19,13 +20,14 @@
       ./modules/common.nix
       home-manager.nixosModules.home-manager
         {
-            home-manager = {
-              useGlobalPkgs = true;
-              useUserPackages = true;
-              users.kirkham = import ./modules/home.nix;
-              extraSpecialArgs = {inherit inputs;}
-            };
-          };
+          home-manager.useGlobalPkgs = true;
+          home-manager.backupFileExtension = "HMBackup";
+          home-manager.useUserPackages = true;
+          home-manager.users.kirkham.imports = [
+            ./modules/home.nix
+          ];
+          home-manager.extraSpecialArgs = { inherit inputs; system = "x86_64-linux";};
+        }
       ];
     };
   };

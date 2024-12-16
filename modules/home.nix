@@ -1,10 +1,23 @@
-{ config, pkgs, inputs, ... }:
+{ config, pkgs, inputs, system, ... }:
 
 {
   # Home Manager needs a bit of information about you and the
   # paths it should manage.
   home.username = "kirkham";
   home.homeDirectory = "/home/kirkham";
+
+  # Packages that should be installed to the user profile.
+  home.packages = with pkgs; [
+    fastfetch
+    inputs.zen-browser.packages."${system}".specific
+  ];
+
+  # Install & Configure Git
+     programs.git = {
+       enable = true;
+       userName = "Jason Kirkham";
+       userEmail = "jason.kirkham@gmail.com";
+     };
 
   # This value determines the Home Manager release that your
   # configuration is compatible with. This helps avoid breakage

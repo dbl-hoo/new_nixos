@@ -1,8 +1,8 @@
 { config, pkgs, ... }:
+
 {
   
-  
-  #enable firefox
+#enable firefox
   programs.firefox.enable = true;
   
   # Your common configuration here
@@ -26,7 +26,5 @@
     vscodium # code writing
   ];
 
-  # Other common settings
-  # ...
 }
 
