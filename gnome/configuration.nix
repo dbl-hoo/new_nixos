@@ -51,7 +51,7 @@
   environment.systemPackages = with pkgs; [
     alacritty  # A fast, cross-platform, OpenGL terminal emulator
     bat        # A cat clone with syntax highlighting and Git integration
-    code-cursor # Cursor text editor (VSCode-based)
+    code-cursor # Cursor AI IDE (VSCode-based)
     duf        # Disk usage utility with a modern, intuitive interface
     eza        # Modern, maintained replacement for ls
     git        # Distributed version control system
