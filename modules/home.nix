@@ -16,6 +16,11 @@
        enable = true;
        userName = "Jason Kirkham";
        userEmail = "jason.kirkham@gmail.com";
+       extraConfig = {
+         init = {
+           defaultBranch = "main";
+         };
+       };
      };
 
   # Install additional programs
