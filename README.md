@@ -6,18 +6,12 @@ My personal NixOS configuration using Home Manager for system and package manage
 
 ### Applying Changes
 
-After modifying any configuration files:
+sudo nixos-rebuild switch --flake .#[hostname]
 
-# Apply system configuration (if needed)
-sudo nixos-rebuild switch
-```
+### Updating the flake
+nix flake update
 
-### Updating System
-
-# Update system packages
-sudo nixos-rebuild switch --upgrade
-
-# Garbage collection (removes old generations)
+### Garbage collection (removes old generations)
 nix-collect-garbage -d
 ```
 
