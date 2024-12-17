@@ -37,6 +37,9 @@
     git        # Distributed version control system
     vscodium   # Open source build of VSCode without Microsoft branding
 
+    # Browsers
+    inputs.zen-browser.packages.${system}.specific  # Zen Browser
+
     # System Information & Monitoring
     fastfetch  # Fast system information tool
     htop       # Interactive process viewer and system monitor
