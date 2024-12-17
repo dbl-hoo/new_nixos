@@ -58,7 +58,6 @@
     gparted    # Graphical disk partition editor
     htop       # Interactive process viewer and system monitor
     kitty      # Fast, feature-rich, GPU-based terminal emulator
-    neovim     # Vim-based text editor with modern features
     nh         # Nix helper for common commands
     spotify    # Music streaming service
     tree       # Recursive directory listing command
