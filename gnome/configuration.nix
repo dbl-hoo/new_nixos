@@ -47,9 +47,6 @@
  	#allow unfree
 	nixpkgs.config.allowUnfree = true;
 
-  #enable firefox
-  programs.firefox.enable = true;
-  
   # Your common configuration here
   environment.systemPackages = with pkgs; [
     git 
