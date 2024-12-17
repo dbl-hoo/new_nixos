@@ -49,24 +49,22 @@
 
   # Your common configuration here
   environment.systemPackages = with pkgs; [
-    git 
-    neovim
-		gedit	
-		alacritty
-		kitty
-		code-cursor
-    bat # A cat clone with syntax highlighting and Git integration
-		duf # Disk usage utility with a modern, intuitive interface
-    eza # Modern, maintained replacement for ls
-    git # Distributed version control system
-    gparted # Graphical disk partition editor
-		htop # Interactive process viewer and system monitor
-		nh # Nix helper
-		spotify # Music streaming service
-		tree # Recursive directory listing command
-    unrar # Utility for extracting RAR archives
-    unzip # Utility for extracting ZIP archives
-    vscodium # code writing
+    alacritty  # A fast, cross-platform, OpenGL terminal emulator
+    bat        # A cat clone with syntax highlighting and Git integration
+    code-cursor # Cursor text editor (VSCode-based)
+    duf        # Disk usage utility with a modern, intuitive interface
+    eza        # Modern, maintained replacement for ls
+    git        # Distributed version control system
+    gparted    # Graphical disk partition editor
+    htop       # Interactive process viewer and system monitor
+    kitty      # Fast, feature-rich, GPU-based terminal emulator
+    neovim     # Vim-based text editor with modern features
+    nh         # Nix helper for common commands
+    spotify    # Music streaming service
+    tree       # Recursive directory listing command
+    unrar      # Utility for extracting RAR archives
+    unzip      # Utility for extracting ZIP archives
+    vscodium   # Open source build of VSCode without Microsoft branding
   ];
 
 	#disable firewall
