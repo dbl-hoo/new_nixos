@@ -49,21 +49,8 @@
 
   # Your common configuration here
   environment.systemPackages = with pkgs; [
-    alacritty  # A fast, cross-platform, OpenGL terminal emulator
-    bat        # A cat clone with syntax highlighting and Git integration
-    code-cursor # Cursor AI IDE (VSCode-based)
-    duf        # Disk usage utility with a modern, intuitive interface
-    eza        # Modern, maintained replacement for ls
-    git        # Distributed version control system
-    gparted    # Graphical disk partition editor
-    htop       # Interactive process viewer and system monitor
-    kitty      # Fast, feature-rich, GPU-based terminal emulator
-    nh         # Nix helper for common commands
-    spotify    # Music streaming service
-    tree       # Recursive directory listing command
-    unrar      # Utility for extracting RAR archives
-    unzip      # Utility for extracting ZIP archives
-    vscodium   # Open source build of VSCode without Microsoft branding
+    nano
+    git
   ];
 
 	#disable firewall
