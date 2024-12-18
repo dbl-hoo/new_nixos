@@ -19,15 +19,10 @@
   time.timeZone = "Americas/New_York";
 
   # Select internationalisation properties.
-   i18n.defaultLocale = "en_US.UTF-8";
+  i18n.defaultLocale = "en_US.UTF-8";
 
-	#enable gnome
-  services.xserver = {
-  	enable = true;
-  	displayManager.gdm.enable = true;
-  	desktopManager.gnome.enable = true;
-		xkb.layout = "us";
-	};
+  #enable hyprland
+  programs.hyprland.enable = true;
 
   # Enable sound.
   # services.pipewire = {
