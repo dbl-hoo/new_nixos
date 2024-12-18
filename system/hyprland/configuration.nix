@@ -24,6 +24,10 @@
   #enable hyprland
   programs.hyprland.enable = true;
 
+  #zsh
+  programs.zsh.enable = true;
+  users.defaultUserShell = pkgs.zsh;
+
   # Enable sound.
   # services.pipewire = {
   #   enable = true;

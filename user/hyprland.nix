@@ -1,4 +1,4 @@
-{ config, lib, pkgs, ... }:
+{ config, lib, pkgs, username, host, ... }:
 
 {
   wayland.windowManager.hyprland = {
@@ -87,7 +87,7 @@
       };
 
       master = {
-        new_is_master = true;
+        new_status = "master";
       };
 
       # Misc Settings
@@ -120,14 +120,15 @@
       # Key Bindings
       "$mainMod" = "SUPER";
       bind = [
-        "$mainMod, Q, exec, kitty"
-        "$mainMod, C, killactive,"
+        "$mainMod, RETURN, exec, alacritty"
+        "$mainMod, Q, killactive,"
         "$mainMod, M, exit,"
         "$mainMod, E, exec, thunar"
-        "$mainMod, V, togglefloating,"
-        "$mainMod, R, exec, rofi -show drun"
+        "$mainMod, F, togglefloating,"
+        "$mainMod, SPACE, exec, rofi -show drun"
         "$mainMod, P, pseudo,"
         "$mainMod, J, togglesplit,"
+        "$mainMod, B, exec, firefox"
         
         # Focus bindings
         "$mainMod, left, movefocus, l"
@@ -183,15 +184,12 @@
         "nofocus,class:^$,title:^$,xwayland:1,floating:1,fullscreen:0,pinned:0"
       ];
     };
-  };
 
-  # Required packages for the configuration
-  home.packages = with pkgs; [
-    kitty
-    thunar
-    rofi
-    playerctl
-    brightnessctl
-    wpctl
-  ];
+    # Autostart programs
+    extraConfig = ''
+      # Programs to start at launch
+      exec-once = waybar # Status bar
+      exec-once = hyprpolkit # Authentication agent
+    '';
+  };
 }

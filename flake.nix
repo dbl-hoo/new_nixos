@@ -14,55 +14,38 @@
 		};
 	};
 
-	outputs = { self, nixpkgs, home-manager, zen-browser, ... }@inputs: {
-		nixosConfigurations = {
-			# GNOME Configuration
-			gnome = nixpkgs.lib.nixosSystem {
-				system = "x86_64-linux";
-				specialArgs = { inherit inputs; };
-				modules = [ 
-					./system/gnome/configuration.nix 
-					
-					home-manager.nixosModules.home-manager {
-						home-manager = {
-							useGlobalPkgs = true;
-							useUserPackages = true;
-							backupFileExtension = "HMBackup";
-							users.kirkham.imports = [ ./modules/home.nix ];
-							extraSpecialArgs = { 
-								inherit inputs; 
-								system = "x86_64-linux";
-							};
+	outputs = { self, nixpkgs, home-manager, zen-browser, ... }@inputs: 
+		let
+			system = "x86_64-linux";
+			host = "hyprland";
+			username = "kirkham";
+		in
+			{
+				nixosConfigurations = {
+					"${host}" = nixpkgs.lib.nixosSystem {
+						specialArgs = { 
+							inherit inputs username host system;
 						};
-					}
-				];
+						modules = [ 
+							./system/${host}/configuration.nix 
+							
+							home-manager.nixosModules.home-manager {
+								home-manager = {
+									useGlobalPkgs = true;
+									useUserPackages = true;
+									backupFileExtension = "HMBackup";
+									users.${username}.imports = [
+										./user/home.nix 
+										./user/hyprland.nix 
+									];
+									extraSpecialArgs = { 
+										inherit inputs host system username;
+									};
+								};
+							}
+						];
+					};
+				};
 			};
-			
-			# Hyprland Configuration
-			hyprland = nixpkgs.lib.nixosSystem {
-				system = "x86_64-linux";
-				specialArgs = { inherit inputs; };
-				modules = [ 
-					./system/hyprland/configuration.nix 
-					
-					home-manager.nixosModules.home-manager {
-						home-manager = {
-							useGlobalPkgs = true;
-							useUserPackages = true;
-							backupFileExtension = "HMBackup";
-							users.kirkham.imports = [ 
-                ./modules/home.nix 
-                ./user/hyprland/hyprland.nix 
-              ];
-							extraSpecialArgs = { 
-								inherit inputs; 
-								system = "x86_64-linux";
-							};
-						};
-					}
-				];
-			};
-		};
-	};
 }
 

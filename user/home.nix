@@ -5,6 +5,10 @@
   home.username = "kirkham";
   home.homeDirectory = "/home/kirkham";
 
+  imports = [
+    ./shell.nix
+  ];
+
   # Program Configurations
   programs = {
     # Enable Home Manager
@@ -44,21 +48,49 @@
     fastfetch  # Fast system information tool
     htop       # Interactive process viewer and system monitor
     pfetch     # Simple system information tool
+    ncdu       # Ncurses disk usage analyzer
 
     # File Management & Utilities
     bat        # A cat clone with syntax highlighting and Git integration
+    brightnessctl # Simple program to read and control device brightness
+    dosfstools # Tools for creating and checking MS-DOS FAT filesystems
     duf        # Disk usage utility with a modern, intuitive interface
     eza        # Modern, maintained replacement for ls
+    file-roller # Archive manager for GNOME
+    font-manager # Font management application for GTK desktop environments
     gparted    # Graphical disk partition editor
+    killall    # Utility to kill processes by name
     tree       # Recursive directory listing command
     unrar      # Utility for extracting RAR archives
     unzip      # Utility for extracting ZIP archives
+    wget       # Command-line file retriever
 
     # Nix Tools
     nh         # Nix helper for common commands
 
     # Media & Entertainment
     spotify    # Music streaming service
+    ffmpeg     # Complete solution for recording, converting, and streaming audio/video
+    mpv        # Media player
+    playerctl  # Command-line utility for controlling media players
+
+    # System Management
+    hplip      # HP printing support
+    ntfs3g     # NTFS filesystem driver and utilities
+    greetd.tuigreet # Text-based greeter for login managers
+
+    # Wayland Specific
+    hyprpolkitagent # Polkit authentication agent for Hyprland
+    wl-clipboard # Command-line copy/paste utility for Wayland
+    waybar      # Status bar for Wayland
+		rofi-wayland
+
+    # Network & System Tray
+    networkmanagerapplet      # A graphical front-end for iwd and an indicator
+    pavucontrol # PulseAudio volume control
+
+    # Notification & Display
+    libnotify  # Library for sending desktop notifications
   ];
 
   # Home Manager State Version
