@@ -1,13 +1,33 @@
-{ config, pkgs, inputs, system, ... }:
+{ config, pkgs, inputs, system, lib, ... }:
 
 {
+  #imports
+  imports = [./shell.nix];
+  
   # User Configuration
   home.username = "kirkham";
   home.homeDirectory = "/home/kirkham";
 
-  imports = [
-    ./shell.nix
-  ];
+  # Stylix  Options
+  gtk = {
+    enable = true;
+    iconTheme = {
+      name = "Qogir";
+      package = pkgs.qogir-icon-theme;
+    };
+    gtk3.extraConfig = {
+      gtk-application-prefer-dark-theme = 1;
+    };
+    gtk4.extraConfig = {
+      gtk-application-prefer-dark-theme = 1;
+    };
+  };
+  qt = {
+    enable = true;
+    style.name = "adwaita-dark";
+    platformTheme.name = "gtk3";
+  };
+
 
   # Program Configurations
   programs = {
@@ -16,7 +36,11 @@
 
     # Enable Firefox
     firefox.enable = true;
-    
+
+    alacritty.enable = true;
+
+    waybar.enable = true;
+
     # Configure Git
     git = {
       enable = true;
@@ -91,6 +115,9 @@
 
     # Notification & Display
     libnotify  # Library for sending desktop notifications
+
+    # Text Editors
+    gedit      # GNOME text editor
   ];
 
   # Home Manager State Version

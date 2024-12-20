@@ -1,86 +1,80 @@
 { config, lib, pkgs, ... }:
 
 {
-  imports =
-    [ # Include the results of the hardware scan.
-      ./hardware-configuration.nix
-    ];
+  imports = [
+    ./hardware-configuration.nix
+    ../fonts.nix
+  ];
 
-  # Use the systemd-boot EFI boot loader.
-  boot.loader.systemd-boot.enable = true;
-  boot.loader.efi.canTouchEfiVariables = true;
+  # Boot Configuration
+  boot.loader = {
+    systemd-boot.enable = true;
+    efi.canTouchEfiVariables = true;
+  };
 
-  # networking.hostName = "nixos"; # Define your hostname.
-  # Pick only one of the below networking options.
-  # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
-  networking.networkmanager.enable = true;  # Easiest to use and most distros use this by default.
-
-  # Set your time zone.
-  time.timeZone = "Americas/New_York";
-
-  # Select internationalisation properties.
+  # System Configuration
+  time.timeZone = "America/New_York";
   i18n.defaultLocale = "en_US.UTF-8";
+  nixpkgs.config.allowUnfree = true;
+  nix.settings.experimental-features = [ "nix-command" "flakes" ];
 
-  #enable hyprland
-  programs.hyprland.enable = true;
+  # Networking
+  networking = {
+    networkmanager.enable = true;
+    firewall.enable = false;
+  };
 
-  #zsh
-  programs.zsh.enable = true;
+  # Desktop Environment
+  programs = {
+    hyprland.enable = true;
+    zsh.enable = true;
+  };
+
+  # User Configuration
   users.defaultUserShell = pkgs.zsh;
+  users.users.kirkham = {
+    homeMode = "755";
+    isNormalUser = true;
+    extraGroups = [ "wheel" "networkmanager" "scanner" "lp" ];
+    packages = with pkgs; [];
+  };
 
-  # Enable sound.
-  # services.pipewire = {
-  #   enable = true;
-  #   pulse.enable = true;
-  # };
+  stylix = {
+    enable = true;
+    image = ../../user/wallpapers/east_tn_mountains.jpg;
+    polarity = "dark";
+    opacity.terminal = 0.8;
+    cursor.package = pkgs.bibata-cursors;
+    cursor.name = "Bibata-Modern-Ice";
+    cursor.size = 24;
+    fonts = {
+      monospace = {
+        package = pkgs.nerd-fonts.jetbrains-mono;
+        name = "JetBrainsMono Nerd Font Mono";
+      };
+      sansSerif = {
+        package = pkgs.montserrat;
+        name = "Montserrat";
+      };
+      serif = {
+        package = pkgs.montserrat;
+        name = "Montserrat";
+      };
+      sizes = {
+        applications = 12;
+        terminal = 14;
+        desktop = 11;
+        popups = 12;
+      };
+    };
+  };
 
-  # Define a user account. Don't forget to set a password with ‘passwd’.
-   users.users.kirkham = {
-     isNormalUser = true;
-     extraGroups = [ "wheel" ]; # Enable ‘sudo’ for the user.
-     packages = with pkgs; [
-  #     tree
-     ];
-   };
-
- 	#allow unfree
-	nixpkgs.config.allowUnfree = true;
-
-  # Your common configuration here
+  # System Packages
   environment.systemPackages = with pkgs; [
     nano
     git
   ];
 
-	#disable firewall
-   networking.firewall.enable = false;
-
-	#flakes
-	  nix.settings.experimental-features = [ "nix-command" "flakes" ];
-
-  # Copy the NixOS configuration file and link it from the resulting system
-  # (/run/current-system/configuration.nix). This is useful in case you
-  # accidentally delete configuration.nix.
-  # system.copySystemConfiguration = true;
-
-  # This option defines the first version of NixOS you have installed on this particular machine,
-  # and is used to maintain compatibility with application data (e.g. databases) created on older NixOS versions.
-  #
-  # Most users should NEVER change this value after the initial install, for any reason,
-  # even if you've upgraded your system to a new NixOS release.
-  #
-  # This value does NOT affect the Nixpkgs version your packages and OS are pulled from,
-  # so changing it will NOT upgrade your system - see https://nixos.org/manual/nixos/stable/#sec-upgrading for how
-  # to actually do that.
-  #
-  # This value being lower than the current NixOS release does NOT mean your system is
-  # out of date, out of support, or vulnerable.
-  #
-  # Do NOT change this value unless you have manually inspected all the changes it would make to your configuration,
-  # and migrated your data accordingly.
-  #
-  # For more information, see `man configuration.nix` or https://nixos.org/manual/nixos/stable/options#opt-system.stateVersion .
-  system.stateVersion = "25.05"; # Did you read the comment?
-
+  system.stateVersion = "25.05";
 }
 

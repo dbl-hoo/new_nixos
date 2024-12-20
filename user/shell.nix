@@ -8,8 +8,8 @@
 let 
   myAliases = {
 		# System commands
-		sr = "nh os switch --hostname ${host} /home/${username}/new_nixos";
-		su = "nh os switch --hostname ${host} --update /home/${username}/new_nixos";
+		nr = "nh os switch --hostname ${host} /home/${username}/new_nixos";
+		nu = "nh os switch --hostname ${host} --update /home/${username}/new_nixos";
 		ncg = "nix-collect-garbage --delete-old && sudo nix-collect-garbage -d && sudo /run/current-system/bin/switch-to-configuration boot";
 		
 		# Navigation
